@@ -1,7 +1,156 @@
 import React, { useEffect, useState } from "react";
+import { Link } from 'react-router-dom';
+import { Card, CardDeck, Image } from "react-bootstrap";
+import { time } from "../../web3/time";
 
 export default function Main() {
+  const [listCoupons, setCoupons] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [noMetamsk, setNoMetamask] = useState(false);
 
+  const createSubArray = (pools) => {
+    let chunks = [];
+
+    while (pools.length > 4) {
+      chunks.push(pools.splice(0, 4));
+    }
+
+    if (pools.length > 0) {
+      chunks.push(pools);
+    }
+
+    setCoupons(chunks);
+    setLoading(false);
+  }
+
+  const getCoupons = async () => {
+    const allCoupons = [];
+    const couponCount = await window.couponFactory
+      .methods
+      .totalCoupons()
+      .call();
+
+    if (Number(couponCount) === 0) {
+      setLoading(false);
+    }
+
+    for (let i = couponCount - 1; i >= 0; i--) {
+      const distCoupon = await window.couponFactory
+        .methods
+        .allCoupons(i)
+        .call();
+
+      allCoupons.push(distCoupon);
+
+      if (i === 0) {
+        createSubArray(allCoupons);
+      }
+    }
+  }
+
+  const isMetamaskInstalled = () => {
+    return (typeof window.ethereum !== 'undefined');
+  }
+
+  useEffect(() => {
+    if (!isMetamaskInstalled()) {
+        setLoading(false);
+        setNoMetamask(true);
+    } else if (listCoupons.length === 0) {
+        getCoupons();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  function DisplayCard({ coupon, count }) {
+    return (
+      <Card key={count} className="display-coupon-card" >
+        <Link
+          key={count}
+          style={{ textDecoration: "none", color: "black" }}
+          to={`/view/${coupon.couponAddress}/${coupon.couponTokenSymbol}/${coupon.ticketBuyToken === dai ?
+            "DAI" :
+            "USDC"}`}
+        >
+          <Card.Header style={{ marginBottom: "5px" }}>
+            <Image src={coupon.baseTokenURI} width="50px"></Image>
+            <span> {coupon.couponTokenName} Coupon</span>
+          </Card.Header>
+
+          <Card.Body>
+            <div style={{ marginBottom: "10px" }}>
+              Ticket Price: {coupon.ticketPrice}
+              <span> {coupon.ticketBuyToken === dai ?
+                "DAI" :
+                "USDC"}
+              </span>
+            </div>
+            <div style={{ marginBottom: "10px" }}>
+              Dist Interval: Every {coupon.distInterval} minutes
+            </div>
+            <div style={{ marginBottom: "5px" }}>
+              {time.currentUnixTime() < (
+                Number(coupon.couponStartTimestamp) +
+                Number(coupon.ticketBuyDuration) * 60
+              ) ?
+                <div>
+                  <span>Close In: </span>
+                  <span className="info-message">
+                    {time.getRemaingTime(
+                      Number(coupon.couponStartTimestamp) +
+                      Number(coupon.ticketBuyDuration) * 60
+                    )}
+                  </span>
+                </div>
+                :
+                <span className="warning-message">
+                  Sold out
+                </span>
+              }
+            </div>
+          </Card.Body>
+        </Link>
+      </Card>
+    );
+  }
+
+  if (loading) {
+    return <Loading />
+  };
+
+  return (
+    <div>
+      {!noMetamsk ?
+        (listCoupons.map((element, key) => (
+          element.length === 4 ?
+            <CardDeck key={key} style={{ margin: "2%" }}>
+              {element.map((pool, k) => (
+                <DisplayCard key={k} pool={pool} count={k} />
+              ))}
+            </CardDeck>
+            :
+            <CardDeck key={key} style={{ margin: "2%" }}>
+              {element.map((pool, k) => (
+                <DisplayCard key={k} pool={pool} count={k} />
+              ))}
+
+              {[...Array(4 - element.length)].map((x, i) =>
+                <Card
+                  key={element.length + i + 1}
+                  className="hidden-card"
+                ></Card>
+              )}
+            </CardDeck>
+          )))
+        : <div
+            className="alert-message"
+            style={{ marginTop: "20%", fontSize: "x-large" }}
+          >
+            You don't have metamask. Please install first !!
+        </div>
+      }
+    </div >
+  );
 
 }
 

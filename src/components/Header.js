@@ -7,13 +7,14 @@ import {
 } from "react-bootstrap";
 
 import AlertModal from "./AlertModal";
+import { initContract } from "../web3/init";
 
 export default function Header() {
   const [errorModal, setErrorModal] = useState(false);
 
   const handleConnectMetamask = () => {
     if (isMetamaskInstalled()) {
-      //init
+      initContract();
     } else {
       setErrorModal(true);
     }
@@ -31,12 +32,13 @@ export default function Header() {
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Nav className="mr-auto">
-          
+          <Nav.Link href="#create-coupon">Create Coupon</Nav.Link>
+          <Nav.Link href="#faucet">Faucet</Nav.Link>
         </Nav>
         <Nav>
           <Button
             onClick={handleConnectMetamask}
-            >ConnectMetamask
+            >Connect Metamask
           </Button>
         </Nav>
       </Navbar>
