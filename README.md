@@ -1,10 +1,14 @@
-# Getting Started with Create React App
+# BSC Coupon - NFT coupon system
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+It's an NFT based gamify coupon system.
+The user get NFTs with a unique ticket number by purchasing coupon. 
+A random coupon is given at a fixed time interval and, eliminate the number from the coupon pool. 
+The last remaining coupon becomes the lucky coupon. And the more active you are, the more likely you are to win.
 
-## Available Scripts
+On each coupon creation, a smart contract gets deployed on the Binance Smart Chain. 
 
-In the project directory, you can run:
+## Tech Stack
+React.js, Solidity, IPFS, NFT, Bootstrap, BSC
 
 ### `yarn start`
 
