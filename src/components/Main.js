@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Link } from 'react-router-dom';
 import { Card, CardDeck, Image } from "react-bootstrap";
-import { time } from "../../web3/time";
+import { time } from "../web3/time";
+import Loading from "./Loading";
 
 export default function Main() {
+  const dai = "0x5A01Ea01Ba9A8DC2B066714A65E61a78838B1b9e";
   const [listCoupons, setCoupons] = useState([]);
   const [loading, setLoading] = useState(true);
   const [noMetamsk, setNoMetamask] = useState(false);

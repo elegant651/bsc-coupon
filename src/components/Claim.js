@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import AlertModal from "../Utils/AlertModal";
-import SuccessModal from "../Utils/SuccessModal";
+import AlertModal from "./AlertModal";
+import SuccessModal from "./SuccessModal";
 import { Row, Col, Button, Card } from "react-bootstrap";
 
 export default function Claim({

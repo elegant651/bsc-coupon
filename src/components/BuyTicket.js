@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import AlertModal from "../AlertModal";
+import AlertModal from "./AlertModal";
 import SuccessModal from "./SuccessModal";
 import { precision } from "../web3/precision";
 import { Row, Col, Button, Card } from "react-bootstrap";

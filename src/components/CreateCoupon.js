@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ipfsClient from "ipfs-http-client";
-import AlertModal from "../Utils/AlertModal";
+import AlertModal from "./AlertModal";
 import SuccessModal from "./SuccessModal";
 import history from "./history";
 import {
