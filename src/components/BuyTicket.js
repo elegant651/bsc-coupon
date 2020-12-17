@@ -87,7 +87,7 @@ export default function BuyTicket({
         return new Promise(async (resolve, reject) => {
             erc20Instance.methods.approve
                 (
-                    poolAddress,
+                    couponAddress,
                     await precision.add(
                         Number(balanceNeeded) - Number(allowance),
                         decimals,

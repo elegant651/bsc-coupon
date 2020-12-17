@@ -10,15 +10,15 @@ export default function Main() {
   const [loading, setLoading] = useState(true);
   const [noMetamsk, setNoMetamask] = useState(false);
 
-  const createSubArray = (pools) => {
+  const createSubArray = (coupons) => {
     let chunks = [];
 
-    while (pools.length > 4) {
-      chunks.push(pools.splice(0, 4));
+    while (coupons.length > 4) {
+      chunks.push(coupons.splice(0, 4));
     }
 
-    if (pools.length > 0) {
-      chunks.push(pools);
+    if (coupons.length > 0) {
+      chunks.push(coupons);
     }
 
     setCoupons(chunks);

@@ -71,7 +71,7 @@ export default function Claim({
         return new Promise(async (resolve, reject) => {
             contractInstance.methods.approve
                 (
-                    poolAddress,
+                    couponAddress,
                     ticketNumber,
                 )
                 .send()

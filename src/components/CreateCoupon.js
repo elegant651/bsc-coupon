@@ -162,7 +162,7 @@ export default function CreateCoupon() {
                                             couponTokenName: e.target.value
                                         })}
                                         style={{ width: "80%" }}
-                                        value={addCoupontate.couponTokenName}
+                                        value={addCouponState.couponTokenName}
                                         required
                                     />
                                 </Col>
