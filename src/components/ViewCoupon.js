@@ -22,7 +22,7 @@ import Claim from "./Claim";
 
 export default function ViewPool() {
     let routes;
-    const DAI = "0x5A01Ea01Ba9A8DC2B066714A65E61a78838B1b9e";
+    const BNB = "0x2B8fF854c5e16cF35B9A792390Cc3a2a60Ec9ba2";
     const USDC = "0x65471bdCDb3720Dc07B914756884b50a2b4395fb";
     const { couponAddress, nftToken, buyToken } = useParams();
     const [loading, setLoading] = useState(true);
@@ -97,6 +97,7 @@ export default function ViewPool() {
 
                 const tokenBaseURI = await contractInstance
                     .methods.baseURI().call();
+                
 
                 let couponResult = 0, couponWinnerAddr = "";
                 if (Number(distCount) === Number(totalTicket) - 1 &&
@@ -126,7 +127,7 @@ export default function ViewPool() {
                     if (Number(couponResult) === Number(ticketNumber)) {
                         isWinnerTicket = true;
                     }
-                }
+                }                
 
                 let erc20Balance = await precision.remove(
                     await erc20Instance
@@ -134,6 +135,8 @@ export default function ViewPool() {
                     await erc20Instance
                         .methods.decimals().call()
                 );
+
+                console.log('fd', window.userAddress +"/" +erc20Balance)
 
                 setState({
                     totalTicket,
@@ -150,7 +153,7 @@ export default function ViewPool() {
                     isWinnerTicket,
                     couponWinnerAddr,
                     erc20Balance,
-                });
+                });                
 
                 setLoading(false);
             }
@@ -173,9 +176,11 @@ export default function ViewPool() {
 
                 const erc20 = new window.web3.eth.Contract(
                     erc20Abi.default,
-                    buyToken === "DAI" ? DAI : USDC,
+                    buyToken === "BNB" ? BNB : USDC,
                     { from: window.userAddress }
                 );
+
+                console.log('dss', erc20)
 
                 setErc20Instance(erc20);
                 setContractInstance(contract);
@@ -211,8 +216,8 @@ export default function ViewPool() {
     };
 
     const getTokenSymbol = () => {
-        return buyToken === "DAI" ?
-            "DAI" :
+        return buyToken === "BNB" ?
+            "BNB" :
             "USDC";
     };
 
@@ -376,7 +381,7 @@ export default function ViewPool() {
                                         couponAddress={couponAddress}
                                         contractInstance={contractInstance}
                                         erc20Instance={erc20Instance}
-                                        buyToken={buyToken === "DAI" ? "DAI" : "USDC"}
+                                        buyToken={buyToken === "BNB" ? "BNB" : "USDC"}
                                         availableBalance={state.erc20Balance}
                                         balanceNeeded={state.ticketPrice}
                                         callback={fetchContractData}

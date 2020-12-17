@@ -33,7 +33,7 @@ export default function Header() {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Nav className="mr-auto">
           <Nav.Link href="#create-coupon">Create Coupon</Nav.Link>
-          <Nav.Link href="#faucet">Faucet</Nav.Link>
+          <Nav.Link href="#token-faucet">Faucet</Nav.Link>
         </Nav>
         <Nav>
           <Button

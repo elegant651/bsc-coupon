@@ -1,6 +1,6 @@
 pragma solidity ^0.6.0;
 
-import "./IERC20.sol";
+import "./IBEP20.sol";
 
 contract Faucet {
   mapping(address => mapping(address => bool)) public alreadyClaimed;
@@ -13,13 +13,13 @@ contract Faucet {
 
     alreadyClaimed[msg.sender][token] = true;
 
-    uint256 decimals = IERC20(token).decimals();
-    IERC20(token).transfer(msg.sender, 100 * 10**decimals);
+    uint256 decimals = IBEP20(token).decimals();
+    IBEP20(token).transfer(msg.sender, 100 * 10**decimals);
   }
 
   function getContractBalance(address token) public view returns (uint256) {
-    uint256 decimals = IERC20(token).decimals();
+    uint256 decimals = IBEP20(token).decimals();
     
-    return IERC20(token).balanceOf(address(this)) / 10**decimals;
+    return IBEP20(token).balanceOf(address(this)) / 10**decimals;
   }
 }

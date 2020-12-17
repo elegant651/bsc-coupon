@@ -1,10 +1,10 @@
 pragma solidity ^0.6.0;
-import "./IERC20.sol";
+import "./IBEP20.sol";
 import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC721/IERC721.sol";
 import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC721/ERC721.sol";
 
 contract Coupon is ERC721 {
-    IERC20 public ticketBuyToken;
+    IBEP20 public ticketBuyToken;
     uint256 public ticketPrice;
     uint256 public ticketNumber;
     uint256 public distInterval;
@@ -30,7 +30,7 @@ contract Coupon is ERC721 {
     )
     
     public ERC721(_name, _symbol) {
-        ticketBuyToken = IERC20(_ticketBuyToken);
+        ticketBuyToken = IBEP20(_ticketBuyToken);
         ticketPrice = _ticketBuyPrice;
         distInterval = _distInterval;
         couponStartTime = block.timestamp;

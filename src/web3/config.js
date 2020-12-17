@@ -3,7 +3,7 @@ import * as faucet from '../abis/faucet.json';
 
 export const config = {
     couponFactoryAbi: couponFactory.default,
-    couponFactoryAddress: "0x1299ef5B76f188f1AA3419353ff8A7DA681e501",
+    couponFactoryAddress: "0x4BAA43FdEC8b45756E61a99ae3C4a6A6F6BB62b5",
     tokenFaucetAbi: faucet.default,
-    tokenFaucetAddress: "0x31E3dfd44720c72170B0Fc479E3b10622785d340",
+    tokenFaucetAddress: "0xfa2ECefC6300842A7c71fc02F16435e56d69c135",
 }

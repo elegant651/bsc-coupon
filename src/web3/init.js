@@ -13,7 +13,7 @@ export async function initContract() {
         config.couponFactoryAbi,
         config.couponFactoryAddress,
         { from: window.userAddress }
-    );
+    );    
 
     window.tokenFaucet = new window.web3.eth.Contract(
         config.tokenFaucetAbi,

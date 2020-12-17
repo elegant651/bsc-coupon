@@ -5,7 +5,7 @@ import { time } from "../web3/time";
 import Loading from "./Loading";
 
 export default function Main() {
-  const dai = "0x5A01Ea01Ba9A8DC2B066714A65E61a78838B1b9e";
+  const bnb = "0x2B8fF854c5e16cF35B9A792390Cc3a2a60Ec9ba2";
   const [listCoupons, setCoupons] = useState([]);
   const [loading, setLoading] = useState(true);
   const [noMetamsk, setNoMetamask] = useState(false);
@@ -70,8 +70,8 @@ export default function Main() {
         <Link
           key={count}
           style={{ textDecoration: "none", color: "black" }}
-          to={`/view/${coupon.couponAddress}/${coupon.couponTokenSymbol}/${coupon.ticketBuyToken === dai ?
-            "DAI" :
+          to={`/view/${coupon.couponAddress}/${coupon.couponTokenSymbol}/${coupon.ticketBuyToken === bnb ?
+            "BNB" :
             "USDC"}`}
         >
           <Card.Header style={{ marginBottom: "5px" }}>
@@ -82,8 +82,8 @@ export default function Main() {
           <Card.Body>
             <div style={{ marginBottom: "10px" }}>
               Ticket Price: {coupon.ticketPrice}
-              <span> {coupon.ticketBuyToken === dai ?
-                "DAI" :
+              <span> {coupon.ticketBuyToken === bnb ?
+                "BNB" :
                 "USDC"}
               </span>
             </div>
@@ -126,14 +126,14 @@ export default function Main() {
         (listCoupons.map((element, key) => (
           element.length === 4 ?
             <CardDeck key={key} style={{ margin: "2%" }}>
-              {element.map((pool, k) => (
-                <DisplayCard key={k} pool={pool} count={k} />
+              {element.map((coupon, k) => (
+                <DisplayCard key={k} coupon={coupon} count={k} />
               ))}
             </CardDeck>
             :
             <CardDeck key={key} style={{ margin: "2%" }}>
-              {element.map((pool, k) => (
-                <DisplayCard key={k} pool={pool} count={k} />
+              {element.map((coupon, k) => (
+                <DisplayCard key={k} coupon={coupon} count={k} />
               ))}
 
               {[...Array(4 - element.length)].map((x, i) =>

@@ -18,18 +18,18 @@ export default function Faucet() {
   });
   const [tokens] = useState([
     {
-      name: "DAI",
-      address: "",
+      name: "BNB",
+      address: "0x2B8fF854c5e16cF35B9A792390Cc3a2a60Ec9ba2",
       status: false
     }, {
       name: "USDC",
-      address: "",
+      address: "0x65471bdCDb3720Dc07B914756884b50a2b4395fb",
       status: false
     }
   ]);
 
   const handleGetTestTokens = (tokenAddress) => {
-    window.faucet.methods
+    window.tokenFaucet.methods
       .claimTestTokens(tokenAddress)
       .send()
       .on('transactionHash', () => {
@@ -49,7 +49,8 @@ export default function Faucet() {
 
   const checkIsAlreadyClaimed = () => {
     tokens.forEach(async (token, i) => {
-      const status = await window.faucet
+      console.log('ff', token.address)
+      const status = await window.tokenFaucet
         .methods.alreadyClaimed(
           window.userAddress,
           token.address,

@@ -24,7 +24,7 @@ export default function CreateCoupon() {
         ticketPrice: "",
         distInterval: "",
         ticketBuyDuration: "",
-        ticketBuyToken: "",
+        ticketBuyToken: "0x2B8fF854c5e16cF35B9A792390Cc3a2a60Ec9ba2",
         image: null,
     });
 
@@ -40,7 +40,7 @@ export default function CreateCoupon() {
         open: false
     });
     const [tokens] = useState([
-        { name: "DAI", address: "0x5A01Ea01Ba9A8DC2B066714A65E61a78838B1b9e" },
+        { name: "BNB", address: "0x2B8fF854c5e16cF35B9A792390Cc3a2a60Ec9ba2" },
         { name: "USDC", address: "0x65471bdCDb3720Dc07B914756884b50a2b4395fb" }
     ]);
 
@@ -59,8 +59,10 @@ export default function CreateCoupon() {
             setDeploying(false);
         }
 
+        console.log(addCouponState)
+
         window.couponFactory.methods
-            .addDistCoupon(
+            .addCoupon(
                 addCouponState.couponTokenName,
                 addCouponState.couponTokenSymbol,
                 addCouponState.ticketBuyToken,
@@ -242,10 +244,10 @@ export default function CreateCoupon() {
                                         placeholder="In minutes (Eg. 30)"
                                         onChange={(e) => setAddCouponState({
                                             ...addCouponState,
-                                            tokenBuyDuration: e.target.value
+                                            ticketBuyDuration: e.target.value
                                         })}
                                         style={{ width: "80%" }}
-                                        value={addCouponState.tokenBuyDuration}
+                                        value={addCouponState.ticketBuyDuration}
                                         required
                                     />
                                 </Col>
