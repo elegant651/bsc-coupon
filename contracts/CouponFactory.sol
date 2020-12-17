@@ -16,7 +16,7 @@ contract CouponFactory {
     }
 
     uint256 public totalCoupons;
-    Coupons[] public allCoupons;
+    CouponInfo[] public allCoupons;
 
     event NewCoupon(
         uint256 id,
