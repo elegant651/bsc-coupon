@@ -7,6 +7,10 @@ The last remaining coupon becomes the lucky coupon. And the more active you are,
 
 On each coupon creation, a smart contract gets deployed on the Binance Smart Chain. 
 
+## Binance Smart Chain Testnet
+couponFactoryAddress: "0x4BAA43FdEC8b45756E61a99ae3C4a6A6F6BB62b5",
+tokenFaucetAddress: "0xfa2ECefC6300842A7c71fc02F16435e56d69c135",
+
 ## Tech Stack
 React.js, Solidity, IPFS, NFT, Bootstrap, BSC
 
